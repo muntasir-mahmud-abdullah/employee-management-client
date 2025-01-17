@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const WorkSheet = () => {
+  const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]); // State for tasks
   const [form, setForm] = useState({ task: "Sales", hours: "", date: "" }); // State for the form
   const [editingTask, setEditingTask] = useState(null); // To track the task being edited
@@ -19,7 +21,9 @@ const WorkSheet = () => {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${baseURL}/tasks`);
+      const response = await axios.get(
+        `${baseURL}/user-tasks?email=${user.email}`
+      );
       setTasks(response.data);
     } catch (error) {
       notifyError("Error fetching tasks: " + error.message);
@@ -31,12 +35,21 @@ const WorkSheet = () => {
   // Add a new task
   const addTask = async (e) => {
     e.preventDefault();
+
     try {
       setLoading(true);
-      const response = await axios.post(`${baseURL}/tasks`, form);
-      setTasks([response.data, ...tasks]);
+
+      // Include the user's email in the task data
+      const taskData = {
+        ...form,
+        email: user.email, // Add the logged-in user's email
+      };
+
+      const response = await axios.post(`${baseURL}/tasks`, taskData);
+
+      setTasks([response.data, ...tasks]); // Update the task list in the state
       notifySuccess("Task added successfully!");
-      setForm({ task: "Sales", hours: "", date: "" }); // Reset form
+      setForm({ task: "Sales", hours: "", date: "" }); // Reset the form
     } catch (error) {
       notifyError("Error adding task: " + error.message);
     } finally {
@@ -121,7 +134,9 @@ const WorkSheet = () => {
         />
         <button
           type="submit"
-          className={`bg-${editingTask ? "yellow" : "blue"}-500 text-white px-4 py-2`}
+          className={`bg-${
+            editingTask ? "yellow" : "blue"
+          }-500 text-white px-4 py-2`}
         >
           {editingTask ? "Update Task" : "Add Task"}
         </button>
