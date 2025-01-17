@@ -1,0 +1,31 @@
+[
+    {
+      "id": "1",
+      "employeeId": "1",
+      "task": "Sales",
+      "hoursWorked": 5,
+      "date": "2025-01-01"
+    },
+    {
+      "id": "2",
+      "employeeId": "1",
+      "task": "Support",
+      "hoursWorked": 4,
+      "date": "2025-01-02"
+    },
+    {
+      "id": "3",
+      "employeeId": "2",
+      "task": "Content",
+      "hoursWorked": 6,
+      "date": "2025-01-03"
+    },
+    {
+      "id": "4",
+      "employeeId": "2",
+      "task": "Paper-work",
+      "hoursWorked": 7,
+      "date": "2025-01-04"
+    }
+  ]
+  
