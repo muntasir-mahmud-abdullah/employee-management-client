@@ -3,15 +3,15 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../Providers/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const WorkSheet = () => {
   const { user } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
   const [tasks, setTasks] = useState([]); // State for tasks
   const [form, setForm] = useState({ task: "Sales", hours: "", date: "" }); // State for the form
   const [editingTask, setEditingTask] = useState(null); // To track the task being edited
-  const [loading, setLoading] = useState(false); // Loading state
-
-  const baseURL = "http://localhost:5000"; // Replace with your backend base URL
+  const [loading, setLoading] = useState(false); // Loading state// Replace with your backend base URL
 
   // Notify with react-toastify
   const notifySuccess = (message) => toast.success(message);
@@ -21,9 +21,7 @@ const WorkSheet = () => {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${baseURL}/user-tasks?email=${user.email}`
-      );
+      const response = await axiosPublic.get(`/user-tasks?email=${user.email}`);
       setTasks(response.data);
     } catch (error) {
       notifyError("Error fetching tasks: " + error.message);
@@ -45,7 +43,7 @@ const WorkSheet = () => {
         email: user.email, // Add the logged-in user's email
       };
 
-      const response = await axios.post(`${baseURL}/tasks`, taskData);
+      const response = await axiosPublic.post("/tasks", taskData);
 
       setTasks([response.data, ...tasks]); // Update the task list in the state
       notifySuccess("Task added successfully!");
@@ -61,10 +59,7 @@ const WorkSheet = () => {
   const updateTask = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
-        `${baseURL}/tasks/${editingTask._id}`,
-        form
-      );
+      const response = await axiosPublic.put(`/tasks/${editingTask._id}`, form);
       setTasks(
         tasks.map((task) =>
           task._id === editingTask._id ? response.data : task
@@ -82,7 +77,7 @@ const WorkSheet = () => {
   const deleteTask = async (id) => {
     try {
       setLoading(true);
-      await axios.delete(`${baseURL}/tasks/${id}`);
+      await axiosPublic.delete(`/tasks/${id}`);
       setTasks(tasks.filter((task) => task._id !== id));
       notifySuccess("Task deleted successfully!");
     } catch (error) {
