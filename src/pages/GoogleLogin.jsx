@@ -8,25 +8,44 @@ const GoogleLogin = () => {
   const { googleLogIn } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const handleGoogleLogIn = () => {
-    googleLogIn().then((result) => {
-      console.log(result.user);
+
+  const handleGoogleLogIn = async () => {
+    try {
+      const result = await googleLogIn();
+      console.log("Google user:", result.user);
+
       const userInfo = {
         email: result.user?.email,
         name: result.user?.displayName,
+        role: "Employee", // Default role for Google login
       };
-      axiosPublic.post("/users", userInfo).then((res) => {
-        console.log(res.data);
-        navigate("/");
-      });
-    });
+
+      // Check if the user is fired
+      const response = await axiosPublic.get(`/employees/${userInfo.email}`);
+      const existingUser = response.data;
+
+      if (existingUser.isFired) {
+        alert("Your account has been disabled. Please contact the admin.");
+        return;
+      }
+
+      // Add user to the database if not already present
+      await axiosPublic.post("/users", userInfo);
+
+      // Navigate to the home page
+      navigate("/");
+    } catch (error) {
+      console.error("Error during Google login:", error);
+      alert("Error logging in with Google. Please try again.");
+    }
   };
+
   return (
     <div>
       <div className="p-8">
         <div className="divider"></div>
         <button onClick={handleGoogleLogIn} className="btn">
-          <FaGoogle className="mr-2"></FaGoogle>
+          <FaGoogle className="mr-2" />
           Google
         </button>
       </div>
