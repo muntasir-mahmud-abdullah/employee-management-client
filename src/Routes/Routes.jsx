@@ -9,7 +9,11 @@ import AdminDashboard from "../pages/Dashboard/AdminDashboard";
 import PrivateRoute from "./PrivateRoute";
 import WorkSheet from "../pages/Dashboard/WorkSheet";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
-
+import EmployeeList from "../pages/Dashboard/EmployeeList";
+import EmployeeDetails from "../pages/Dashboard/EmployeeDetails";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import Progress from "../pages/Dashboard/Progress";
+// const axiosSecure = useAxiosSecure();
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +50,20 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/hr",
         element: <HRDashboard></HRDashboard>,
+        children:[
+          {
+            path:"employee-list",
+            element:<EmployeeList></EmployeeList>
+          },
+          {
+            path:"details/:email",
+            element:<EmployeeDetails></EmployeeDetails>,
+          },
+          {
+            path:"progress",
+            element:<Progress></Progress>,
+          },
+        ]
       },
       {
         path: "/dashboard/admin",
