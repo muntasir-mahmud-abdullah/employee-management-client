@@ -13,6 +13,7 @@ import EmployeeList from "../pages/Dashboard/EmployeeList";
 import EmployeeDetails from "../pages/Dashboard/EmployeeDetails";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Progress from "../pages/Dashboard/Progress";
+import AllEmployeeList from "../pages/Dashboard/AllEmployeeList";
 // const axiosSecure = useAxiosSecure();
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,12 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/admin",
         element: <AdminDashboard></AdminDashboard>,
+        children:[
+          {
+            path:"all-employee-list",
+            element:<AllEmployeeList></AllEmployeeList>,
+          },
+        ]
       },
     ],
   },
