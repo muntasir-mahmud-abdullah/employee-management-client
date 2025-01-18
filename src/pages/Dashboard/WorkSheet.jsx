@@ -12,7 +12,23 @@ const WorkSheet = () => {
   const [form, setForm] = useState({ task: "Sales", hours: "", date: "" }); // State for the form
   const [editingTask, setEditingTask] = useState(null); // To track the task being edited
   const [loading, setLoading] = useState(false); // Loading state// Replace with your backend base URL
-
+  const getMonthFromDate = (date) => {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return monthNames[new Date(date).getMonth()];
+  };
   // Notify with react-toastify
   const notifySuccess = (message) => toast.success(message);
   const notifyError = (message) => toast.error(message);
@@ -41,7 +57,8 @@ const WorkSheet = () => {
       const taskData = {
         ...form,
         email: user.email,
-        name:user.displayName || "Unknown User", // Add the logged-in user's email & name
+        name:user.displayName || "Unknown User",
+        month: getMonthFromDate(form.date), // Add the logged-in user's email & name
       };
       const response = await axiosPublic.post("/tasks", taskData);
 
