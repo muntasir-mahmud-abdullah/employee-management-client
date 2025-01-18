@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../utils/api";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Progress = () => {
-  const [workRecords, setWorkRecords] = useState([]); // All work records
+  const [tasks, setTasks] = useState([]); // All tasks
   const [employees, setEmployees] = useState([]); // List of employees for the dropdown
   const [selectedName, setSelectedName] = useState(""); // Selected employee name
   const [selectedMonth, setSelectedMonth] = useState(""); // Selected month
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
+  const axiosSecure = useAxiosSecure();
 
-  // Fetch all work records
-  const fetchWorkRecords = async () => {
+  // Fetch all tasks
+  const fetchTasks = async () => {
     try {
       setLoading(true);
       const queryParams = new URLSearchParams();
-        console.log(queryParams);
+
       if (selectedName) queryParams.append("name", selectedName);
       if (selectedMonth) queryParams.append("month", selectedMonth);
 
-      const response = await axios.get(`/progress?${queryParams.toString()}`);
-      setWorkRecords(response.data);
+      const response = await axiosSecure.get(`/progress?${queryParams.toString()}`);
+      setTasks(response.data);
     } catch (error) {
-      console.error("Error fetching progress records:", error);
-      alert("Error fetching progress records.");
+      console.error("Error fetching tasks:", error);
+      alert("Error fetching tasks.");
     } finally {
       setLoading(false);
     }
@@ -30,17 +32,18 @@ const Progress = () => {
   // Fetch all employees for the dropdown
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("/employees"); // Adjust endpoint as needed
+      const response = await axiosSecure.get("/employees"); // Adjust endpoint as needed
+      console.log(response.data);
       setEmployees(response.data);
     } catch (error) {
       console.error("Error fetching employees:", error);
     }
   };
 
-  // Fetch data on component mount and when filters change
+  // Fetch tasks and employees on component mount
   useEffect(() => {
     fetchEmployees();
-    fetchWorkRecords();
+    fetchTasks();
   }, [selectedName, selectedMonth]);
 
   return (
@@ -88,7 +91,7 @@ const Progress = () => {
         </select>
       </div>
 
-      {/* Work Records Table */}
+      {/* Tasks Table */}
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -103,13 +106,13 @@ const Progress = () => {
             </tr>
           </thead>
           <tbody>
-            {workRecords.map((record, index) => (
+            {tasks.map((task, index) => (
               <tr key={index}>
-                <td>{record.name}</td>
-                <td>{record.task}</td>
-                <td>{record.hours}</td>
-                <td>{record.date}</td>
-                <td>{record.month}</td>
+                <td>{task.name}</td>
+                <td>{task.task}</td>
+                <td>{task.hours}</td>
+                <td>{task.date}</td>
+                <td>{task.month}</td>
               </tr>
             ))}
           </tbody>
