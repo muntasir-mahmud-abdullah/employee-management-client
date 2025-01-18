@@ -37,12 +37,12 @@ const WorkSheet = () => {
     try {
       setLoading(true);
 
-      // Include the user's email in the task data
+      // Include the user's email and name in the task data
       const taskData = {
         ...form,
-        email: user.email, // Add the logged-in user's email
+        email: user.email,
+        name:user.displayName || "Unknown User", // Add the logged-in user's email & name
       };
-
       const response = await axiosPublic.post("/tasks", taskData);
 
       setTasks([response.data, ...tasks]); // Update the task list in the state
