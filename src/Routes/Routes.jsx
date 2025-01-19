@@ -14,6 +14,7 @@ import EmployeeDetails from "../pages/Dashboard/EmployeeDetails";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Progress from "../pages/Dashboard/Progress";
 import AllEmployeeList from "../pages/Dashboard/AllEmployeeList";
+import Payroll from "../pages/Dashboard/Payroll";
 // const axiosSecure = useAxiosSecure();
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
           {
             path:"all-employee-list",
             element:<AllEmployeeList></AllEmployeeList>,
+          },
+          {
+            path:"payroll",
+            element:<Payroll></Payroll>,
           },
         ]
       },

@@ -38,11 +38,12 @@ const EmployeeList = () => {
     e.preventDefault();
 
     try {
-      const { email, salary } = selectedEmployee;
+      const { email,name, salary } = selectedEmployee;
       const { month, year } = e.target.elements;
 
       await axiosSecure.post("/payroll", {
         email,
+        name,
         amount: salary,
         month: month.value,
         year: year.value,
