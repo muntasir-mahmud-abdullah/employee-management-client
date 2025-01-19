@@ -15,6 +15,8 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import Progress from "../pages/Dashboard/Progress";
 import AllEmployeeList from "../pages/Dashboard/AllEmployeeList";
 import Payroll from "../pages/Dashboard/Payroll";
+import ContactUs from "../pages/Dashboard/ContactUs";
+import AdminMessages from "../pages/Dashboard/AdminMessages";
 // const axiosSecure = useAxiosSecure();
 export const router = createBrowserRouter([
   {
@@ -35,51 +37,64 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/employee",
-        element:  <PrivateRoute><EmployeeDashboard></EmployeeDashboard></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <EmployeeDashboard></EmployeeDashboard>
+          </PrivateRoute>
+        ),
         children: [
           {
             // index:true,
-            path:"work-sheet",
-            element:<WorkSheet></WorkSheet>
+            path: "work-sheet",
+            element: <WorkSheet></WorkSheet>,
           },
           {
             // index:true,
-            path:"payment-history",
-            element:<PaymentHistory></PaymentHistory>
+            path: "payment-history",
+            element: <PaymentHistory></PaymentHistory>,
           },
-        ]
+          {
+            // index:true,
+            path: "contact-us",
+            element: <ContactUs></ContactUs>,
+          },
+        ],
       },
       {
         path: "/dashboard/hr",
         element: <HRDashboard></HRDashboard>,
-        children:[
+        children: [
           {
-            path:"employee-list",
-            element:<EmployeeList></EmployeeList>
+            path: "employee-list",
+            element: <EmployeeList></EmployeeList>,
           },
           {
-            path:"details/:email",
-            element:<EmployeeDetails></EmployeeDetails>,
+            path: "details/:email",
+            element: <EmployeeDetails></EmployeeDetails>,
           },
           {
-            path:"progress",
-            element:<Progress></Progress>,
+            path: "progress",
+            element: <Progress></Progress>,
           },
-        ]
+        ],
       },
       {
         path: "/dashboard/admin",
         element: <AdminDashboard></AdminDashboard>,
-        children:[
+        children: [
           {
-            path:"all-employee-list",
-            element:<AllEmployeeList></AllEmployeeList>,
+            path: "all-employee-list",
+            element: <AllEmployeeList></AllEmployeeList>,
           },
           {
-            path:"payroll",
-            element:<Payroll></Payroll>,
+            path: "payroll",
+            element: <Payroll></Payroll>,
           },
-        ]
+          {
+            path: "admin-messages",
+            element: <AdminMessages></AdminMessages>,
+          },
+        ],
       },
     ],
   },
