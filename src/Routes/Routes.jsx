@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -69,6 +69,10 @@ export const router = createBrowserRouter([
         ),
         children: [
           {
+            path: "",
+            element: <Navigate to="employee-list" replace />, // Redirect to default route
+          },
+          {
             path: "employee-list",
             element: <EmployeeList></EmployeeList>,
           },
@@ -90,6 +94,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         children: [
+          {
+            path: "",
+            element: <Navigate to="all-employee-list" replace />, // Redirect to default route
+          },
           {
             path: "all-employee-list",
             element: <AllEmployeeList></AllEmployeeList>,
