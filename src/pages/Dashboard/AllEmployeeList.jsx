@@ -17,7 +17,7 @@ const AllEmployeeList = () => {
       alert("Error fetching employees.");
     } finally {
       setLoading(false);
-    }
+    } 
   };
 
   // Promote an employee to HR

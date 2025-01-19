@@ -62,7 +62,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/hr",
-        element: <HRDashboard></HRDashboard>,
+        element: (
+          <PrivateRoute>
+            <HRDashboard></HRDashboard>
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "employee-list",
@@ -80,7 +84,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin",
-        element: <AdminDashboard></AdminDashboard>,
+        element: (
+          <PrivateRoute>
+            <AdminDashboard></AdminDashboard>
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "all-employee-list",
