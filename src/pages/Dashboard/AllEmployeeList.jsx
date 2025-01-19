@@ -42,6 +42,17 @@ const AllEmployeeList = () => {
     }
   };
 
+  const handleAdjustSalary = async (id, newSalary) => {
+    try {
+      await axoisSecure.patch(`/employees/${id}/salary`, { salary: newSalary });
+      alert("Salary updated successfully");
+      fetchEmployees(); // Refresh the list
+    } catch (error) {
+      console.error("Error updating salary:", error);
+      alert("Error updating salary.");
+    }
+  };
+
   useEffect(() => {
     fetchEmployees();
   }, []);
