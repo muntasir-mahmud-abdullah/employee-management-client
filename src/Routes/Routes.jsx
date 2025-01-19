@@ -1,4 +1,8 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -36,6 +40,11 @@ export const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
+        // index:true,
+        path: "contact-us",
+        element: <ContactUs></ContactUs>,
+      },
+      {
         path: "/dashboard/employee",
         element: (
           <PrivateRoute>
@@ -43,6 +52,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         children: [
+          {
+            path: "",
+            element: <Navigate to="work-sheet" replace />, // Redirect to default route
+          },
           {
             // index:true,
             path: "work-sheet",
@@ -52,11 +65,6 @@ export const router = createBrowserRouter([
             // index:true,
             path: "payment-history",
             element: <PaymentHistory></PaymentHistory>,
-          },
-          {
-            // index:true,
-            path: "contact-us",
-            element: <ContactUs></ContactUs>,
           },
         ],
       },

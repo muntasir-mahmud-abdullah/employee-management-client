@@ -60,6 +60,11 @@ const Navbar = () => {
                   HR Dashboard
                 </Link>
               )}
+              {existingUser?.role === "Employee" && (
+                <Link to="/dashboard/employee" className="hover:underline">
+                  Employee Dashboard
+                </Link>
+              )}
 
               {/* Log Out Button */}
               <button
