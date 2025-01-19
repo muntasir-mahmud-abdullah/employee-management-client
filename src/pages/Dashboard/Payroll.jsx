@@ -37,8 +37,11 @@ const Payroll = () => {
       );
       alert("Payment processed successfully!");
     } catch (error) {
-      console.error("Error processing payment:", error);
-      alert("Error processing payment.");
+      if (error.response?.data?.message) {
+        alert(error.response.data.message); // Show duplicate payment error
+      } else {
+        alert("Error processing payment.");
+      }
     }
   };
 
