@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../utils/api";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Payroll = () => {
@@ -11,7 +10,6 @@ const Payroll = () => {
     try {
       setLoading(true);
       const response = await axiosSecure.get("/payroll");
-      console.log(response.data);
       setRequests(response.data);
     } catch (error) {
       console.error("Error fetching payroll requests:", error);
@@ -21,26 +19,50 @@ const Payroll = () => {
     }
   };
 
-  const handlePay = async (id) => {
+  const handlePay = async (id, email, amount, month, year) => {
     try {
-      const response = await axiosSecure.patch(`/payroll/${id}/pay`);
-      setRequests((prev) =>
-        prev.map((request) =>
-          request._id === id
-            ? {
-                ...request,
-                isPaid: true,
-                paymentDate: response.data.paymentDate,
-              }
-            : request
-        )
+      if (!window.confirm(`Are you sure you want to pay ${amount} for ${month} ${year}?`)) {
+        return;
+      }
+
+      const existingPayments = await axiosSecure.get(`/payments?email=${email}`);
+      const duplicatePayment = existingPayments.data.payments.find(
+        (payment) => payment.month === month && payment.year === year
       );
-      alert("Payment processed successfully!");
+
+      if (duplicatePayment) {
+        alert("Payment for this month and year already exists.");
+        return;
+      }
+
+      const response = await axiosSecure.post("/payments", {
+        email,
+        amount,
+        month,
+        year,
+      });
+
+      if (response.data.payment) {
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request._id === id
+              ? {
+                  ...request,
+                  isPaid: true,
+                  paymentDate: response.data.payment.paymentDate,
+                }
+              : request
+          )
+        );
+        alert("Payment processed successfully!");
+      } else {
+        alert("Payment processing failed. Please try again.");
+      }
     } catch (error) {
       if (error.response?.data?.message) {
-        alert(error.response.data.message); // Show duplicate payment error
+        alert(error.response.data.message);
       } else {
-        alert("Error processing payment.");
+        alert("Error processing payment. Please check your connection and try again.");
       }
     }
   };
@@ -80,7 +102,7 @@ const Payroll = () => {
                   <span className="text-green-500 font-semibold">Paid</span>
                 ) : (
                   <button
-                    onClick={() => handlePay(request._id)}
+                    onClick={() => handlePay(request._id, request.email, request.amount, request.month, request.year)}
                     className="bg-blue-500 text-white px-2 py-1 rounded"
                   >
                     Pay

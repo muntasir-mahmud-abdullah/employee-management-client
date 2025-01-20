@@ -15,7 +15,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    role: "Employee",
+    role: "employee",
     bank_account_no: "",
     salary: "",
     designation: "",
