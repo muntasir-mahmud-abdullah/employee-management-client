@@ -60,7 +60,7 @@ const Navbar = () => {
                   HR Dashboard
                 </Link>
               )}
-              {existingUser?.role === "Employee" && (
+              {existingUser?.role === "employee" && (
                 <Link to="/dashboard/employee" className="hover:underline">
                   Employee Dashboard
                 </Link>

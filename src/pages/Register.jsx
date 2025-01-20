@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import GoogleLogin from "./GoogleLogin";
 import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/";
+
   const axiosPublic = useAxiosPublic();
   const [form, setForm] = useState({
     name: "",
@@ -15,7 +19,7 @@ const Register = () => {
     bank_account_no: "",
     salary: "",
     designation: "",
-    photo: null, // Updated to handle file
+    photo: null,
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -27,8 +31,12 @@ const Register = () => {
     return passwordRegex.test(password);
   };
 
+  const handleNavigate = () => {
+    navigate(from);
+  };
+
   const handleFileChange = (e) => {
-    setForm({ ...form, photo: e.target.files[0] }); // Update file in state
+    setForm({ ...form, photo: e.target.files[0] });
   };
 
   const handleRegister = async (e) => {
@@ -36,7 +44,6 @@ const Register = () => {
     setErrors({});
     setLoading(true);
 
-    // Validate inputs
     if (!validatePassword(form.password)) {
       setErrors((prev) => ({
         ...prev,
@@ -60,7 +67,6 @@ const Register = () => {
       );
 
       const photoURL = imgbbResponse.data.data.display_url;
-      console.log(photoURL);
 
       // Create user in Firebase
       const result = await createUser(form.email, form.password);
@@ -82,8 +88,8 @@ const Register = () => {
 
       await axiosPublic.post("/users", userInfo);
 
-      console.log("Registration successful!");
       alert("Registration successful!");
+      handleNavigate(); // Navigate after successful registration
     } catch (error) {
       console.error("Error during registration:", error);
       setErrors((prev) => ({
@@ -162,7 +168,7 @@ const Register = () => {
           className="border p-2"
           required
         >
-          <option value="Employee">Employee</option>
+          <option value="employee">Employee</option>
           <option value="HR">HR</option>
         </select>
         <button
@@ -179,7 +185,7 @@ const Register = () => {
           Already have an account? <Link to="/login">Log In</Link>
         </small>
       </p>
-      <GoogleLogin></GoogleLogin>
+      <GoogleLogin />
     </div>
   );
 };

@@ -49,7 +49,7 @@ const EmployeeDetails = () => {
   }
 
   if (!employee) {
-    return <p>Employee not found.</p>;
+    return <p>Loading...</p>;
   }
 
   return (
