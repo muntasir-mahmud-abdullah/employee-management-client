@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const AllEmployeeList = () => {
   const [employees, setEmployees] = useState([]); // State for employee data
@@ -14,61 +16,73 @@ const AllEmployeeList = () => {
       setEmployees(response.data);
     } catch (error) {
       console.error("Error fetching employees:", error);
-      alert("Error fetching employees.");
+      toast.error("Error fetching employees.");
     } finally {
       setLoading(false);
-    } 
+    }
   };
 
   // Promote an employee to HR
   const handleMakeHR = async (id) => {
     try {
       await axiosSecure.patch(`/employees/${id}/make-hr`);
-      alert("Employee promoted to HR successfully");
+      Swal.fire("Success!", "Employee promoted to HR successfully.", "success");
       fetchEmployees(); // Refresh the list
     } catch (error) {
       console.error("Error promoting employee to HR:", error);
-      alert("Error promoting employee to HR.");
+      toast.error("Error promoting employee to HR.");
     }
   };
 
   // Fire an employee
   const handleFireEmployee = async (id) => {
-    if (window.confirm("Are you sure you want to fire this employee?")) {
-      try {
-        await axiosSecure.patch(`/employees/${id}/fire`);
-        alert("Employee fired successfully");
-        fetchEmployees(); // Refresh the list
-      } catch (error) {
-        console.error("Error firing employee:", error);
-        alert("Error firing employee.");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to fire this employee?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, fire!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.patch(`/employees/${id}/fire`);
+          Swal.fire("Fired!", "Employee has been fired.", "success");
+          fetchEmployees(); // Refresh the list
+        } catch (error) {
+          console.error("Error firing employee:", error);
+          toast.error("Error firing employee.");
+        }
       }
-    }
+    });
   };
 
   // Adjust an employee's salary
   const handleAdjustSalary = async (id, currentSalary) => {
-    const newSalary = prompt(`Enter new salary for this employee:`, currentSalary);
-
-    // Validate new salary
-    if (!newSalary || isNaN(newSalary)) {
-      alert("Invalid salary value.");
-      return;
-    }
-
-    if (parseFloat(newSalary) <= parseFloat(currentSalary)) {
-      alert("New salary must be greater than the current salary.");
-      return;
-    }
-
-    try {
-      await axiosSecure.patch(`/employees/${id}/salary`, { salary: newSalary });
-      alert("Salary updated successfully");
-      fetchEmployees(); // Refresh the list
-    } catch (error) {
-      console.error("Error updating salary:", error);
-      alert("Error updating salary.");
-    }
+    Swal.fire({
+      title: "Adjust Salary",
+      input: "number",
+      inputLabel: "Enter new salary",
+      inputValue: currentSalary,
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value || isNaN(value) || parseFloat(value) <= parseFloat(currentSalary)) {
+          return "Please enter a valid salary greater than the current salary.";
+        }
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.patch(`/employees/${id}/salary`, { salary: result.value });
+          Swal.fire("Updated!", "Salary updated successfully.", "success");
+          fetchEmployees(); // Refresh the list
+        } catch (error) {
+          console.error("Error updating salary:", error);
+          toast.error("Error updating salary.");
+        }
+      }
+    });
   };
 
   useEffect(() => {
@@ -132,9 +146,7 @@ const AllEmployeeList = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() =>
-                      handleAdjustSalary(employee._id, employee.salary)
-                    }
+                    onClick={() => handleAdjustSalary(employee._id, employee.salary)}
                     className="bg-green-500 text-white px-2 py-1 rounded"
                   >
                     Adjust Salary

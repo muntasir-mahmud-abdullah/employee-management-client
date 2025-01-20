@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/api";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Progress = () => {
   const [tasks, setTasks] = useState([]); // All tasks
@@ -19,11 +19,14 @@ const Progress = () => {
       if (selectedName) queryParams.append("name", selectedName);
       if (selectedMonth) queryParams.append("month", selectedMonth);
 
-      const response = await axiosSecure.get(`/progress?${queryParams.toString()}`);
+      const response = await axiosSecure.get(
+        `/progress?${queryParams.toString()}`
+      );
       setTasks(response.data);
+      Swal.fire("Success", "Tasks loaded successfully!", "success");
     } catch (error) {
+      Swal.fire("Error", "Error fetching tasks.", "error");
       console.error("Error fetching tasks:", error);
-      alert("Error fetching tasks.");
     } finally {
       setLoading(false);
     }
@@ -33,9 +36,9 @@ const Progress = () => {
   const fetchEmployees = async () => {
     try {
       const response = await axiosSecure.get("/employees"); // Adjust endpoint as needed
-      console.log(response.data);
       setEmployees(response.data);
     } catch (error) {
+      Swal.fire("Error", "Error fetching employees.", "error");
       console.error("Error fetching employees:", error);
     }
   };

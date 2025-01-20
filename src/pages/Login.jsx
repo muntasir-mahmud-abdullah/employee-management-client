@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import GoogleLogin from "./GoogleLogin";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const location = useLocation();
@@ -17,27 +18,43 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(""); // Reset error state
-
+  
     try {
       // Check if the user is fired
       const userResponse = await axiosPublic.get(`/employees/${form.email}`);
       console.log(userResponse.data);
       const userData = userResponse.data;
-
+  
       if (userData.isFired) {
-        setError("Your account has been disabled. Please contact the admin.");
+        Swal.fire({
+          icon: "error",
+          title: "Account Disabled",
+          text: "Your account has been disabled. Please contact the admin.",
+        });
         return;
       }
-
+  
       // Proceed with Firebase login
       const result = await logIn(form.email, form.password);
       console.log("Logged in user:", result.user);
+  
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome back!",
+      });
+  
       navigate(from);
     } catch (error) {
       console.error("Error during login:", error);
-      setError("Invalid email or password. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: "Invalid email or password. Please try again.",
+      });
     }
   };
+  
 
   return (
     <div className="container mx-auto py-4">

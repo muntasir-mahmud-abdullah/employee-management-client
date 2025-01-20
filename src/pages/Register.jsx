@@ -4,6 +4,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import GoogleLogin from "./GoogleLogin";
 import axios from "axios";
+import Swal from "sweetalert2"; // Import SweetAlert2
+import { toast } from 'react-toastify'; // Import Toastify
 
 const Register = () => {
   const navigate = useNavigate();
@@ -88,7 +90,14 @@ const Register = () => {
 
       await axiosPublic.post("/users", userInfo);
 
-      alert("Registration successful!");
+      // SweetAlert2 for successful registration
+      Swal.fire({
+        title: "Success!",
+        text: "Registration successful!",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+
       handleNavigate(); // Navigate after successful registration
     } catch (error) {
       console.error("Error during registration:", error);
@@ -96,6 +105,9 @@ const Register = () => {
         ...prev,
         api: "Something went wrong during registration.",
       }));
+
+      // Toastify error message
+      toast.error("Error during registration. Please try again.");
     } finally {
       setLoading(false);
     }

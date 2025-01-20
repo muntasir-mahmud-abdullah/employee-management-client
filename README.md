@@ -60,7 +60,7 @@
 - **Backend:** Node.js, Express.js, MongoDB
 - **Authentication:** Firebase Authentication, JWT
 - **Charting:** Recharts for dynamic data visualization
-- **Hosting:** [Your Hosting Service]
+- **Hosting:** [Firebase]
 
 ## Instructions
 
