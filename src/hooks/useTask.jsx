@@ -4,7 +4,7 @@ const useTask = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/tasks")
+    fetch("https://employee-management-server-nu.vercel.app/tasks")
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);

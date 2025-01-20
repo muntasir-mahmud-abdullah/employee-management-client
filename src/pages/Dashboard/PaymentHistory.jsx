@@ -11,7 +11,7 @@ const PaymentHistory = () => {
   const [page, setPage] = useState(1); // Current page
   const [totalPages, setTotalPages] = useState(1); // Total number of pages
 
-  //   const baseURL = "http://localhost:5000/payments"; // Replace with your backend base URL
+  //   const baseURL = "https://employee-management-server-nu.vercel.app/payments"; // Replace with your backend base URL
 
   // Fetch payment history
   const fetchPayments = async () => {
