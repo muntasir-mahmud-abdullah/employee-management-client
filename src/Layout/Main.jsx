@@ -9,7 +9,10 @@ const Main = () => {
     return (
         <div>
            {isLogin || <Navbar></Navbar>}
+           <div className="max-w-screen-xl mx-auto">
             <Outlet></Outlet>
+           </div>
+            
             {isLogin || <Footer></Footer>}
             
         </div>
