@@ -14,7 +14,7 @@ const HRDashboard = () => {
   ];
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen pt-6">
       {/* Sidebar */}
       <aside
         className={`bg-gray-800 text-white ${

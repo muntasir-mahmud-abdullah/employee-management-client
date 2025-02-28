@@ -52,7 +52,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar  text-white">
+    <nav className="navbar mb-10  text-white">
       <div className="flex flex-col md:flex-row w-full lg:max-w-screen-xl mx-auto justify-between items-center p-4">
         {/* Brand Logo */}
         <Link to="/" className="text-2xl font-bold">
@@ -71,6 +71,11 @@ const Navbar = () => {
               <Link to="/services" className="hover:underline">
                 Services
               </Link>
+              {/* {user && (
+  <Link to="/dashboard/employee" className="hover:underline">
+    Profile
+  </Link>
+)} */}
 
           {user ? (
             <>

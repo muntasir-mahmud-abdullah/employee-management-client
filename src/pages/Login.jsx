@@ -86,7 +86,7 @@ const Login = () => {
           New Here? <Link to="/register">Create an account</Link>
         </small>
       </p>
-      <GoogleLogin />
+      {/* <GoogleLogin /> */}
     </div>
   );
 };

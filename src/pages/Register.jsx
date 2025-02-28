@@ -197,7 +197,7 @@ const Register = () => {
           Already have an account? <Link to="/login">Log In</Link>
         </small>
       </p>
-      <GoogleLogin />
+      {/* <GoogleLogin /> */}
     </div>
   );
 };

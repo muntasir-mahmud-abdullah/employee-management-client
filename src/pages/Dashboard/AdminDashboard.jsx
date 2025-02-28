@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="flex h-screen">
+    <div className="flex pt-6 h-screen">
       {/* Sidebar */}
       <aside className="bg-gray-800 text-white w-64 flex flex-col">
         <div className="p-4 text-2xl font-bold border-b border-gray-700">
