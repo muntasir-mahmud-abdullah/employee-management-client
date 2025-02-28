@@ -24,6 +24,7 @@ import AdminMessages from "../pages/Dashboard/AdminMessages";
 import ErrorPage from "../pages/ErrorPage";
 import AboutUs from "../components/AboutUs";
 import Services from "../components/Services";
+import AllProducts from "../components/AllProducts";
 // const axiosSecure = useAxiosSecure();
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,11 @@ export const router = createBrowserRouter([
         // index:true,
         path: "about-us",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        // index:true,
+        path: "products",
+        element: <AllProducts></AllProducts>,
       },
       {
         // index:true,

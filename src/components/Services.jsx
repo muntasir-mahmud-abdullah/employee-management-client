@@ -17,7 +17,7 @@ const Services = () => {
             <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
             <p><img className="w-2/4 mx-auto" src={service.photo} alt="" /></p>
             <p className="text-gray-500 text-sm">{service.description}</p>
-            <Link className="text-blue-500 text-sm">View More..</Link>
+            <Link to="/products" className="text-blue-500 text-sm">View All Products</Link>
           </div>
           
         ))}
