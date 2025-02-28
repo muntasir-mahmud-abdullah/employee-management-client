@@ -13,11 +13,11 @@ const Services = () => {
       <h2 className="text-2xl font-bold text-center mb-6">Our Services</h2>
       <div className="grid grid-cols-1 h-auto md:grid-cols-3 gap-6">
         {services.map((service, index) => (
-          <div key={index} className="p-6 bg-gray-100 rounded shadow">
+          <div key={index} className="p-6 bg-gray-100 rounded shadow space-y-2 text-center">
             <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-            <p><img className="w-2/4" src={service.photo} alt="" /></p>
-            <p className="">{service.description}</p>
-            <Link className="text-blue-500 ">View More..</Link>
+            <p><img className="w-2/4 mx-auto" src={service.photo} alt="" /></p>
+            <p className="text-gray-500 text-sm">{service.description}</p>
+            <Link className="text-blue-500 text-sm">View More..</Link>
           </div>
           
         ))}

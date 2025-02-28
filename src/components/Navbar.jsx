@@ -53,18 +53,24 @@ const Navbar = () => {
 
   return (
     <nav className="navbar  text-white">
-      <div className="flex w-full mx-auto justify-around items-center py-4">
+      <div className="flex flex-col md:flex-row w-full lg:max-w-screen-xl mx-auto justify-between items-center p-4">
         {/* Brand Logo */}
         <Link to="/" className="text-2xl font-bold">
           Employee Management
         </Link>
 
         {/* Navigation Links */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col md:flex-row items-center gap-4">
           
           <Link to="/contact-us" className="hover:underline">
             Contact Us
           </Link>
+              <Link to="/about-us" className="hover:underline">
+                About Us
+              </Link>
+              <Link to="/services" className="hover:underline">
+                Services
+              </Link>
 
           {user ? (
             <>
@@ -72,6 +78,16 @@ const Navbar = () => {
               {existingUser?.role === "admin" && (
                 <Link to="/dashboard/admin" className="hover:underline">
                   Admin Dashboard
+                </Link>
+              )}
+              {existingUser?.role === "HR" && (
+                <Link to="/dashboard/hr" className="hover:underline">
+                  HR Dashboard
+                </Link>
+              )}
+              {existingUser?.role === "employee" && (
+                <Link to="/dashboard/employee" className="hover:underline">
+                  Employee Dashboard
                 </Link>
               )}
                 {/* Theme Toggle Button */}

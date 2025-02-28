@@ -22,6 +22,8 @@ import Payroll from "../pages/Dashboard/Payroll";
 import ContactUs from "../pages/Dashboard/ContactUs";
 import AdminMessages from "../pages/Dashboard/AdminMessages";
 import ErrorPage from "../pages/ErrorPage";
+import AboutUs from "../components/AboutUs";
+import Services from "../components/Services";
 // const axiosSecure = useAxiosSecure();
 export const router = createBrowserRouter([
   {
@@ -45,6 +47,16 @@ export const router = createBrowserRouter([
         // index:true,
         path: "contact-us",
         element: <ContactUs></ContactUs>,
+      },
+      {
+        // index:true,
+        path: "about-us",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        // index:true,
+        path: "services",
+        element: <Services></Services>,
       },
       {
         path: "/dashboard/employee",
