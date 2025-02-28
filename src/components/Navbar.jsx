@@ -33,8 +33,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 px-4 text-white">
-      <div className="max-w-screen-xl mx-auto flex justify-between items-center py-4">
+    <nav className="navbar  text-white">
+      <div className="flex w-full mx-auto justify-around items-center py-4">
         {/* Brand Logo */}
         <Link to="/" className="text-2xl font-bold">
           Employee Management
