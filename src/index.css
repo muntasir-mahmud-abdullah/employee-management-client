@@ -29,7 +29,7 @@ body {
   }
   .dark body{
     background: #000;
-    color: blue;
+    color: #3b82f5;
   }
   /* Navbar in Dark Mode */
   .dark .navbar {

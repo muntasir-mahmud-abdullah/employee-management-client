@@ -21,11 +21,13 @@ import AllEmployeeList from "../pages/Dashboard/AllEmployeeList";
 import Payroll from "../pages/Dashboard/Payroll";
 import ContactUs from "../pages/Dashboard/ContactUs";
 import AdminMessages from "../pages/Dashboard/AdminMessages";
+import ErrorPage from "../pages/ErrorPage";
 // const axiosSecure = useAxiosSecure();
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
