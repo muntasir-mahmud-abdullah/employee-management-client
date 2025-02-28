@@ -7,6 +7,8 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const [existingUser, setExistingUser] = useState(null); // State for storing employee data
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light"); // Theme State
+
 
   // Fetch employee data when the user is logged in
   useEffect(() => {
@@ -22,6 +24,23 @@ const Navbar = () => {
     };
     fetchEmployees();
   }, [user?.email, axiosPublic]);
+
+  // Handle Theme Toggle
+  const handleThemeToggle = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark"); // For Tailwind dark mode support
+  };
+
+  // Apply theme on page load
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
 
   // Handle user logout
   const handleLogOut = () => {
@@ -42,6 +61,7 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="flex items-center gap-4">
+          
           <Link to="/contact-us" className="hover:underline">
             Contact Us
           </Link>
@@ -54,7 +74,13 @@ const Navbar = () => {
                   Admin Dashboard
                 </Link>
               )}
-
+                {/* Theme Toggle Button */}
+                <button
+                onClick={handleThemeToggle}
+                className="border-2 border-white px-4 py-2 rounded"
+              >
+                {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+              </button>
               {/* Log Out Button */}
               <button
                 onClick={handleLogOut}

@@ -14,3 +14,46 @@
   body {
     padding-top: 60px; /* Add padding so content doesn’t hide behind the navbar */
   }
+
+  /* Light Mode */
+body {
+    background-color: white;
+    color: black;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Dark Mode */
+  .dark {
+    background-color: #121212;
+    color: white;
+  }
+  .dark body{
+    background: #000;
+    color: blue;
+  }
+  /* Navbar in Dark Mode */
+  .dark .navbar {
+    background-color: #1e1e1e;
+  }
+  
+  /* Theme Toggle Button */
+  #theme-toggle {
+    cursor: pointer;
+    padding: 8px 15px;
+    background: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  /* Button in Dark Mode */
+  .dark #theme-toggle {
+    border-color: white;
+    color: white;
+  }
+  body {
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+    
