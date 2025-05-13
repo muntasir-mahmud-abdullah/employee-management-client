@@ -52,7 +52,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="md:navbar bg-gray-600 md:mb-10 text-white">
+    <nav className="md:navbar bg-gray-600 text-white">
       <div className="flex flex-col md:flex-row w-full text-xl  mx-auto justify-around md:justify-between items-center py-4 md:px-4">
         {/* Brand Logo */}
         <Link to="/" className="text-2xl hidden md:flex md:text-3xl font-bold">

@@ -8,40 +8,40 @@ const HeroCarousel = () => {
         {/* Item 1 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://i.ibb.co.com/v6D1JhJz/graduation-attire-displayed-college-campus-60438-3682.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            src="https://i.ibb.co/pvdh60F0/pexels-pixabay-416320.jpg"
+            className="absolute w-full object-contain"
             alt="Slide 1"
           />
         </div>
         {/* Item 2 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://i.ibb.co.com/v6D1JhJz/graduation-attire-displayed-college-campus-60438-3682.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            src="https://i.ibb.co/23bSjNjy/pexels-jeshoots-com-147458-530024.jpg"
+            className="absolute object-contain w-full"
             alt="Slide 2"
           />
         </div>
         {/* Item 3 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://i.ibb.co.com/v6D1JhJz/graduation-attire-displayed-college-campus-60438-3682.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            src="https://i.ibb.co/dwk1H2Qp/image.jpg"
+            className="absolute object-cover w-full"
             alt="Slide 3"
           />
         </div>
         {/* Item 4 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://i.ibb.co.com/v6D1JhJz/graduation-attire-displayed-college-campus-60438-3682.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            src="https://i.ibb.co/23LSb9M9/image-1.jpg"
+            className="absolute -translate-y-12 w-full"
             alt="Slide 4"
           />
         </div>
         {/* Item 5 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://i.ibb.co.com/v6D1JhJz/graduation-attire-displayed-college-campus-60438-3682.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            src="https://i.ibb.co/Fk6r3Ln5/image.jpg"
+            className="absolute block w-full"
             alt="Slide 5"
           />
         </div>
