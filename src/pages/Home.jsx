@@ -8,12 +8,14 @@ import HowItWorks from "./HowItWorks";
 import CaseStudies from "./CaseStudies";
 import FAQ from "./FAQ";
 import Careers from "./Careers";
+import HeroCarousel from "../components/HeroCarousel";
 
 const Home = () => {
   return (
     
     <div>
-      <Banner></Banner>
+      {/* <Banner></Banner> */}
+      <HeroCarousel />
       <Services></Services>
       <HowItWorks></HowItWorks>
       <Testimonials></Testimonials>

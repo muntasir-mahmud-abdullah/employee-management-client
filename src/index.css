@@ -11,9 +11,9 @@
     /* padding: 15px 20px; */
     z-index: 1000; /* Ensure it stays above other elements */
   }
-  body {
+  /* body {
     padding-top: 60px; /* Add padding so content doesn’t hide behind the navbar */
-  }
+  /* }
 
   /* Light Mode */
 body {
