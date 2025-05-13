@@ -2,14 +2,14 @@ import React from 'react';
 
 const HeroCarousel = () => {
   return (
-    <div id="default-carousel" className="relative w-full" data-carousel="slide">
+    <div id="default-carousel" className="relative  w-full" data-carousel="slide">
       {/* Carousel wrapper */}
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+      <div className="relative h-56 overflow-hidden rounded-lg md:h-[500px]">
         {/* Item 1 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
             src="https://i.ibb.co/pvdh60F0/pexels-pixabay-416320.jpg"
-            className="absolute w-full object-contain"
+            className="absolute w-full object-contain md:-translate-y-36"
             alt="Slide 1"
           />
         </div>
@@ -17,7 +17,7 @@ const HeroCarousel = () => {
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
             src="https://i.ibb.co/23bSjNjy/pexels-jeshoots-com-147458-530024.jpg"
-            className="absolute object-contain w-full"
+            className="absolute object-contain w-full md:-translate-y-36"
             alt="Slide 2"
           />
         </div>
@@ -25,7 +25,7 @@ const HeroCarousel = () => {
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
             src="https://i.ibb.co/dwk1H2Qp/image.jpg"
-            className="absolute object-cover w-full"
+            className="absolute object-cover w-full md:-translate-y-36"
             alt="Slide 3"
           />
         </div>
@@ -33,7 +33,7 @@ const HeroCarousel = () => {
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
             src="https://i.ibb.co/23LSb9M9/image-1.jpg"
-            className="absolute -translate-y-12 w-full"
+            className="absolute -translate-y-12  md:-translate-y-96 w-full"
             alt="Slide 4"
           />
         </div>
@@ -41,7 +41,7 @@ const HeroCarousel = () => {
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
             src="https://i.ibb.co/Fk6r3Ln5/image.jpg"
-            className="absolute block w-full"
+            className="absolute  block w-full md:-translate-y-36"
             alt="Slide 5"
           />
         </div>
