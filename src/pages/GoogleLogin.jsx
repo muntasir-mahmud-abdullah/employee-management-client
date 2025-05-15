@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Import Toastify
+import Swal from "sweetalert2"; // Import SweetAlert2
 import { AuthContext } from "../Providers/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2"; // Import SweetAlert2
-import { toast } from "react-toastify"; // Import Toastify
 
 const GoogleLogin = () => {
   const { googleLogIn } = useContext(AuthContext);
@@ -21,21 +21,11 @@ const GoogleLogin = () => {
         name: result.user?.displayName,
         role: "Employee", // Default role for Google login
       };
+      // // console.log(userInfo)
 
-      // Check if the user is fired
-      const response = await axiosPublic.get(`/employees/${userInfo.email}`);
-      const existingUser = response.data;
+      // // Check if the user is fired
 
-      if (existingUser.isFired) {
-        // SweetAlert2 for fired account
-        Swal.fire({
-          title: "Account Disabled",
-          text: "Your account has been disabled. Please contact the admin.",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
-        return;
-      }
+
 
       // Add user to the database if not already present
       await axiosPublic.post("/users", userInfo);
@@ -47,6 +37,21 @@ const GoogleLogin = () => {
         icon: "success",
         confirmButtonText: "OK",
       });
+
+      const response = await axiosPublic.get(`/employees/${userInfo?.email}`);
+      console.log(response.data);
+      const existingUser = response.data;
+            if (existingUser?.isFired) {
+        // SweetAlert2 for fired account
+        Swal.fire({
+          title: "Account Disabled",
+          text: "Your account has been disabled. Please contact the admin.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+        return;
+      }
+
 
       // Navigate to the home page
       navigate("/");
