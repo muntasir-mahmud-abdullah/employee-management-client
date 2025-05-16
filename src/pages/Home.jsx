@@ -12,13 +12,15 @@ import HeroCarousel from "../components/HeroCarousel";
 import WhyUs from "../components/WhyUs";
 import Newsletter from "../components/Newsletter";
 import Gallery from "../components/Gallery";
+import HeroSection from "../components/HeroSection";
 
 const Home = () => {
   return (
     
     <div>
       {/* <Banner></Banner> */}
-      <HeroCarousel />
+      {/* <HeroCarousel /> */}
+      <HeroSection />
       <Services></Services>
       {/* <Gallery /> */}
       <HowItWorks></HowItWorks>
