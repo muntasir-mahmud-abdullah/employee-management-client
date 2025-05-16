@@ -52,7 +52,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="md:navbar bg-gray-600 text-white">
+    <nav className="sticky top-0 left-0 right-0 bg-gray-600 text-white z-50">
       <div className="flex flex-col md:flex-row w-full text-xl  mx-auto justify-around md:justify-between items-center py-4 md:px-4">
         {/* Brand Logo */}
         <Link to="/" className="text-2xl hidden md:flex md:text-3xl font-bold">
@@ -156,68 +156,94 @@ const Navbar = () => {
         </div>
       </div>
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="flex flex-col md:hidden px-4 pb-4">
-                    <Link to="/contact-us" className="hover:underline block">
-            Contact Us
-          </Link>
-          <Link to="/about-us" className="hover:underline block">
-            About Us
-          </Link>
-          <Link to="/services" className="hover:underline block">
-            Services
-          </Link>
-          {/* {user && (
-  <Link to="/dashboard/employee" className="hover:underline">
-    Profile
-  </Link>
-)} */}
+{/* Mobile Menu */}
+{isOpen && (
+  <div className="flex flex-col md:hidden px-4 pb-4">
+    <Link
+      to="/contact-us"
+      className="hover:underline block"
+      onClick={() => setIsOpen(false)}
+    >
+      Contact Us
+    </Link>
+    <Link
+      to="/about-us"
+      className="hover:underline block"
+      onClick={() => setIsOpen(false)}
+    >
+      About Us
+    </Link>
+    <Link
+      to="/services"
+      className="hover:underline block"
+      onClick={() => setIsOpen(false)}
+    >
+      Services
+    </Link>
 
-          {user ? (
-            <>
-              {/* Conditionally render Admin Dashboard link */}
-              {existingUser?.role === "admin" && (
-                <Link to="/dashboard/admin" className="hover:underline block">
-                  Admin Dashboard
-                </Link>
-              )}
-              {existingUser?.role === "HR" && (
-                <Link to="/dashboard/hr" className="hover:underline block">
-                  HR Dashboard
-                </Link>
-              )}
-              {existingUser?.role === "employee" && (
-                <Link to="/dashboard/employee" className="hover:underline block">
-                  Employee Dashboard
-                </Link>
-              )}
-              {/* Theme Toggle Button */}
-              <button
-                onClick={handleThemeToggle}
-                className="border-2 border-white px-4 py-2 rounded block"
-              >
-                {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-              </button>
-              {/* Log Out Button */}
-              <button
-                onClick={handleLogOut}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 block"
-              >
-                Log Out
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="hover:underline block">
-                Login
-              </Link>
-              <Link to="/register" className="hover:underline block">
-                Register
-              </Link>
-            </>
-          )}
-        </div>
-      )}
+    {user ? (
+      <>
+        {existingUser?.role === "admin" && (
+          <Link
+            to="/dashboard/admin"
+            className="hover:underline block"
+            onClick={() => setIsOpen(false)}
+          >
+            Admin Dashboard
+          </Link>
+        )}
+        {existingUser?.role === "HR" && (
+          <Link
+            to="/dashboard/hr"
+            className="hover:underline block"
+            onClick={() => setIsOpen(false)}
+          >
+            HR Dashboard
+          </Link>
+        )}
+        {existingUser?.role === "employee" && (
+          <Link
+            to="/dashboard/employee"
+            className="hover:underline block"
+            onClick={() => setIsOpen(false)}
+          >
+            Employee Dashboard
+          </Link>
+        )}
+        <button
+          onClick={() => { handleThemeToggle(); setIsOpen(false); }}
+          className="border-2 border-white px-4 py-2 rounded block"
+        >
+          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+        </button>
+        <button
+          onClick={() => { handleLogOut(); setIsOpen(false); }}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 block"
+        >
+          Log Out
+        </button>
+      </>
+    ) : (
+      <>
+        <Link
+          to="/login"
+          className="hover:underline block"
+          onClick={() => setIsOpen(false)}
+        >
+          Login
+        </Link>
+        <Link
+          to="/register"
+          className="hover:underline block"
+          onClick={() => setIsOpen(false)}
+        >
+          Register
+        </Link>
+      </>
+    )}
+  </div>
+)}
+
     </nav>
   );
 };

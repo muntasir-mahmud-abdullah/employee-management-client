@@ -3,7 +3,7 @@ import React from 'react';
 const Newsletter = () => {
     return (
         <div>
-            <section className="py-16 bg-[#4283f1] text-white text-center">
+            <section className="py-16 bg-gray-300 dark:bg-gray-600 text-white text-center">
   <div className="max-w-xl mx-auto">
     <h2 className="text-3xl font-bold mb-4">Stay in the Loop</h2>
     <p className="mb-6">Get notified about new features and updates.</p>
